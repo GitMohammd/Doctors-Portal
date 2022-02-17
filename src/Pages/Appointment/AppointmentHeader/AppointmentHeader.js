@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import  Box  from '@mui/system/Box';
 import React from 'react';
 import chair from '../../../images/chair.png'
@@ -10,7 +10,9 @@ const AppointmentHeader = () => {
         <Box>
           <Grid container spacing={2}>
             <Grid item xs={6} md={8}>
-                <Calender></Calender>            </Grid>
+              <Typography sx={{textAlign:"left"}} variant='h4'>Appointment</Typography>
+                <Calender></Calender>            
+                </Grid>
             <Grid item xs={6} md={4}>
               <img style={{ width: "100%" }} src={chair} alt="" />
             </Grid>
