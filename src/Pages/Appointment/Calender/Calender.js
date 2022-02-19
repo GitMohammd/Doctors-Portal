@@ -4,25 +4,27 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import StaticDatePicker from "@mui/lab/StaticDatePicker";
 import TextField from "@mui/material/TextField";
+import { Box } from '@mui/system';
 
 
-const Calender = () => {
-    const [value, setValue] = React.useState(new Date());
-    console.log(value)
+const Calender = ({date, setDate}) => {
+    
     return (
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <StaticDatePicker
-          // orientation="landscape"
-          displayStaticWrapperAs="desktop"
-          openTo="day"
-          value={value}
-          shouldDisableDate={isWeekend}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider>
+      <Box sx={{boxShadow: 3}}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            // orientation="landscape"
+            displayStaticWrapperAs="desktop"
+            openTo="day"
+            value={date}
+            shouldDisableDate={isWeekend}
+            onChange={(newValue) => {
+              setDate(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </Box>
     );
 };
 
