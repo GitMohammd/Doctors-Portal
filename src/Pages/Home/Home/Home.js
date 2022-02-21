@@ -5,6 +5,7 @@ import Backgeround_Bannar from '../Bannar/Backgeround_Bannar';
 import Bannar from '../Bannar/Bannar';
 import Exceptional_Dental from '../Exceptional_Dental/Exceptional_Dental';
 import Services from '../Services/Services';
+import Testimonial from '../Testimonial/Testimonial';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Services></Services>
             <Exceptional_Dental></Exceptional_Dental>
             <AppoinmentBannar></AppoinmentBannar>
+            <Testimonial></Testimonial>
         </div>
     );
 };
