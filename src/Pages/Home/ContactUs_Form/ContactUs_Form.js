@@ -28,9 +28,9 @@ const ContactUs_Form = () => {
 
             <input type="text" placeholder="Subject" id="lname" name="lname" />
             <br />
-            <textArea placeholder="Your Massage">
+            <textarea placeholder="Your Massage" >
+              </textarea>
 
-            </textArea>
             <br />
             <Button
               sx={{

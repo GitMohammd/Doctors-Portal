@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 
 const Service = ({service}) => {
     const {name, description, img, alt} = service;
-    console.log(service);
     return (
       <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
         <CardMedia
