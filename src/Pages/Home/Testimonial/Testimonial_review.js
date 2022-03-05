@@ -4,7 +4,6 @@ import React from 'react';
 
 const Testimonial_review = ({ PatientsReview }) => {
     const { name , description, from, img} = PatientsReview;
-    console.log(PatientsReview)
   return (
     <>
       <Grid item xs={6} md={4}>

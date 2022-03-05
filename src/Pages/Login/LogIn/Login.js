@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../../images/login.png'
 import UseAuth from '../../../Context/Context/UseAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({})
     const { user, loginUser, authError, loading } = UseAuth();
+    const navigate = useNavigate()
+    const location = useLocation()
+
     const handleChange = e =>{
       const field = e.target.name;
       const value = e.target.value;
@@ -18,7 +21,7 @@ const Login = () => {
 
 
     const handleLoginForm = e =>{
-        loginUser(loginData.email, loginData.password);
+        loginUser(loginData.email, loginData.password, navigate, location );
         alert('submitted')
         e.preventDefault();
     }

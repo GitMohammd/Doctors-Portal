@@ -48,12 +48,13 @@ const UseFirebase = () => {
     return () => unSubscribed;
   }, []);
 
-  const loginUser = (email, password) => {
+  const loginUser = (email, password, navigate, location) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+
+      const from = location.state?.from?.pathname || "/";
+      navigate(from, {replace:true})
         setAuthError("");
       })
       .catch((error) => {
