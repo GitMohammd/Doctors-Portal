@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  updateProfile,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
@@ -18,14 +19,25 @@ const googleProvider = new GoogleAuthProvider();
 const UseFirebase = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
-  const [authError, setAuthError] = useState('');
+  const [authError, setAuthError] = useState("");
 
-  const registerUser = (email, password, navigate) => {
+  const registerUser = (email, password, name, navigate) => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        navigate('/', {replace:true})
         setAuthError("");
+        const newUser = { email, displayName: name };
+        setUser(newUser);
+        // send name to firebase after creation
+        updateProfile(auth.currentUser, {
+          displayName: name
+        })
+          .then(() => {
+          })
+          .catch((error) => {
+            setAuthError(error.message);
+          });
+        navigate("/", { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -34,8 +46,8 @@ const UseFirebase = () => {
       })
       .finally(() => setLoading(false));
   };
-  const signInWithGoogle = (location, navigate) =>{
-     setLoading(true);
+  const signInWithGoogle = (location, navigate) => {
+    setLoading(true);
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         setAuthError("");
@@ -45,7 +57,7 @@ const UseFirebase = () => {
         setAuthError(error.message);
       })
       .finally(() => setLoading(false));
-  }
+  };
 
   // observe user state
 
@@ -67,9 +79,8 @@ const UseFirebase = () => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-
-      const from = location.state?.from?.pathname || "/";
-      navigate(from, {replace:true})
+        const from = location.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
         setAuthError("");
       })
       .catch((error) => {
