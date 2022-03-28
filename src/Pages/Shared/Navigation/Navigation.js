@@ -32,7 +32,16 @@ const Navigation = () => {
               <Link to="/appointment">Appoinment</Link>
             </Button>
             {user?.email ? (
+              <>
               <Button>
+                <NavLink
+                  to="dashboard"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Appointment Dashboard
+                </NavLink>
+              </Button>
+                <Button>
                 <NavLink
                   to=""
                   onClick={logOutUser}
@@ -41,6 +50,8 @@ const Navigation = () => {
                   LogOut
                 </NavLink>
               </Button>
+              
+              </>
             ) : (
               <Button>
                 <NavLink

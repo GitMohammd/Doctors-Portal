@@ -13,7 +13,6 @@ const Calender = ({date, setDate}) => {
       <Box sx={{boxShadow: 3}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <StaticDatePicker
-            // orientation="landscape"
             displayStaticWrapperAs="desktop"
             openTo="day"
             value={date}
