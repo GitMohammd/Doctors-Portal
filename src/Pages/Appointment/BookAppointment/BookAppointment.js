@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 import Paper from "@mui/material/Paper";
 import BookingModal from '../BookingModal/BookingModal';
 
-const BookAppointment = ({ booking, date }) => {
+const BookAppointment = ({ booking, date, setBookingSuccess }) => {
    const [openModal, setOpenModal] = useState(false);
    const handleOpenModal = () => setOpenModal(true);
    const handleCloseModal = () => setOpenModal(false);
@@ -52,6 +52,7 @@ const BookAppointment = ({ booking, date }) => {
         date={date}
         openModal={openModal}
         handleCloseModal={handleCloseModal}
+        setBookingSuccess ={setBookingSuccess}
       ></BookingModal>
     </>
   );
