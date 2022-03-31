@@ -22,23 +22,22 @@ const Navigation = () => {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
-            >
+            > 
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               News
             </Typography>
             <Button>
-              <Link to="/appointment">Appoinment</Link>
+              <Link to="/appointment">Appointment</Link>
             </Button>
             {user?.email ? (
               <>
               <Button>
                 <NavLink
-                  to="dashboard"
+                  to="/dashboard"
                   style={{ textDecoration: "none", color: "white" }}
-                >
-                  Appointment Dashboard
+                >Dashboard
                 </NavLink>
               </Button>
                 <Button>

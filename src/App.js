@@ -7,6 +7,7 @@ import Login from './Pages/Login/LogIn/Login';
 import Register from './Pages/Login/Register/Register';
 import AuthProvider from './Context/Context/AuthProvider';
 import PrivateOutlet from './Pages/Login/PrivateRoute/PrivateOutlet';
+import DashboardHome from './Pages/Dashboard/DashboardHome/DashboardHome';
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<PrivateOutlet />}>
             <Route path="appointment" element={<Appointment />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="dashboard/*" element={<Dashboard />}>
+              <Route path="dashboardHome" element={<DashboardHome />} />
+            </Route>
 
           </Route>
           <Route path="/login" element={<Login />} />
