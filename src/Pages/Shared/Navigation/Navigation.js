@@ -35,7 +35,7 @@ const Navigation = () => {
               <>
               <Button>
                 <NavLink
-                  to="/dashboard"
+                  to="/dashboard/dashboardHome"
                   style={{ textDecoration: "none", color: "white" }}
                 >Dashboard
                 </NavLink>

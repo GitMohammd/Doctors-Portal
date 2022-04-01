@@ -8,6 +8,8 @@ import Register from './Pages/Login/Register/Register';
 import AuthProvider from './Context/Context/AuthProvider';
 import PrivateOutlet from './Pages/Login/PrivateRoute/PrivateOutlet';
 import DashboardHome from './Pages/Dashboard/DashboardHome/DashboardHome';
+import AddDoctor from './Pages/Dashboard/AddDoctor/AddDoctor';
+import MakeAdmin from './Pages/Dashboard/MakeAdmin/MakeAdmin';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="appointment" element={<Appointment />} />
             <Route path="dashboard/*" element={<Dashboard />}>
               <Route path="dashboardHome" element={<DashboardHome />} />
+              <Route path="addDoctor" element={<AddDoctor />} />
+              <Route path="makeAdmin" element={<MakeAdmin />} />
             </Route>
 
           </Route>

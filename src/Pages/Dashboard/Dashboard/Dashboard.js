@@ -17,8 +17,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
-import Calender from '../../Appointment/Calender/Calender';
-import Appointments from '../Appointments/Appointments';
 
 const drawerWidth = 240;
 
@@ -38,6 +36,16 @@ function ResponsiveDrawer(props) {
       <Typography variant="h6" noWrap component="div">
             <Button>
             <Link to="/appointment">Appointment</Link>
+            </Button>
+            </Typography>
+            <Typography variant="h6" noWrap component="div">
+            <Button>
+            <Link to="/dashboard/addDoctor">Add Doctor</Link>
+            </Button>
+            </Typography>
+            <Typography variant="h6" noWrap component="div">
+            <Button>
+            <Link to="/dashboard/makeAdmin">Make Admin</Link>
             </Button>
           </Typography>
       <List>
