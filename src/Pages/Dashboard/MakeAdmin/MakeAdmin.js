@@ -1,4 +1,6 @@
-import { Alert, Button, TextField } from '@mui/material';
+import { Alert } from '@mui/material';
+import { Button } from '@mui/material';
+import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 import UseAuth from '../../../Context/Context/UseAuth';
 
@@ -6,7 +8,6 @@ const MakeAdmin = () => {
     const [email, setEmail] = useState('');
     
     const [success, setSuccess] = useState(false);
-    console.log(email)
     const handleFormSubmit = e => {
       const user = {email}
         const url = `http://localhost:5000/user/admin`;

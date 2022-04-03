@@ -17,10 +17,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
+import UseAuth from '../../../Context/Context/UseAuth';
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+  const {admin} = UseAuth();
   
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -33,12 +35,14 @@ function ResponsiveDrawer(props) {
     <div>
       <Toolbar />
       <Divider />
-      <Typography variant="h6" noWrap component="div">
+      {admin ? 
+        <Box>
+          <Typography variant="h6" noWrap component="div">
             <Button>
             <Link to="/appointment">Appointment</Link>
             </Button>
             </Typography>
-            <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div">
             <Button>
             <Link to="/dashboard/addDoctor">Add Doctor</Link>
             </Button>
@@ -48,6 +52,15 @@ function ResponsiveDrawer(props) {
             <Link to="/dashboard/makeAdmin">Make Admin</Link>
             </Button>
           </Typography>
+        </Box>
+        :  
+           <Typography variant="h6" noWrap component="div">
+            <Button>
+            <Link to="/appointment">Appointment</Link>
+            </Button>
+            </Typography>
+    }
+     
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>

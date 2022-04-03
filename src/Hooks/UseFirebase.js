@@ -20,6 +20,7 @@ const UseFirebase = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const registerUser = (email, password, name, navigate) => {
     setLoading(true);
@@ -82,6 +83,13 @@ const UseFirebase = () => {
     return () => unSubscribed;
   }, []);
 
+  useEffect(() => {
+    const url = `http://localhost:5000/user?email=${user.email}`
+    fetch(url)
+    .then((res) =>res.json())
+    .then(date => setAdmin(date))  
+
+  }, [user.email]);
   const loginUser = (email, password, navigate, location) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
@@ -121,12 +129,12 @@ const UseFirebase = () => {
       body: JSON.stringify(user),
       })
       .then()
-      
-
   }
+
 
   return {
     user,
+    admin,
     loading,
     authError,
     signInWithGoogle,
