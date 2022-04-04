@@ -6,7 +6,7 @@ import UseAuth from '../../../Context/Context/UseAuth';
 
 const MakeAdmin = () => {
     const [email, setEmail] = useState('');
-    
+    const {token} = UseAuth();
     const [success, setSuccess] = useState(false);
     const handleFormSubmit = e => {
       const user = {email}
@@ -14,6 +14,7 @@ const MakeAdmin = () => {
       fetch(url, { 
         method: "PUT",
       headers:  {
+        'authorization': `Basic ${token}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify(user),

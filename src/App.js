@@ -10,6 +10,7 @@ import PrivateOutlet from './Pages/Login/PrivateRoute/PrivateOutlet';
 import DashboardHome from './Pages/Dashboard/DashboardHome/DashboardHome';
 import AddDoctor from './Pages/Dashboard/AddDoctor/AddDoctor';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin/MakeAdmin';
+import AdminPrivetOutlet from './Pages/Login/AdminPrivetOutlet/AdminPrivetOutlet';
 
 function App() {
   return (
@@ -19,10 +20,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<PrivateOutlet />}>
             <Route path="appointment" element={<Appointment />} />
-            <Route path="dashboard/*" element={<Dashboard />}>
+            <Route path="dashboard" element={<Dashboard />}>
               <Route path="dashboardHome" element={<DashboardHome />} />
-              <Route path="addDoctor" element={<AddDoctor />} />
-              <Route path="makeAdmin" element={<MakeAdmin />} />
+              <Route path="" element={< AdminPrivetOutlet/>} >
+                <Route path="addDoctor" element={<AddDoctor />} />
+                <Route path="makeAdmin" element={<MakeAdmin />} />
+              </Route>
             </Route>
 
           </Route>

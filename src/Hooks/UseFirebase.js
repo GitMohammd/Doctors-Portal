@@ -19,6 +19,7 @@ const googleProvider = new GoogleAuthProvider();
 const UseFirebase = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState('')
   const [authError, setAuthError] = useState("");
   const [admin, setAdmin] = useState(false);
 
@@ -73,6 +74,9 @@ const UseFirebase = () => {
     const unSubscribed = onAuthStateChanged(auth, (user) => {
       if (user) {
         if (user) {
+          user.getIdToken(true)
+          .then((idToken) => setToken(idToken))
+          .catch(err => setAuthError(err))
           setUser(user);
         }
       } else {
@@ -135,6 +139,7 @@ const UseFirebase = () => {
   return {
     user,
     admin,
+    token,
     loading,
     authError,
     signInWithGoogle,

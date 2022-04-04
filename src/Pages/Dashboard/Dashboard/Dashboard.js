@@ -53,7 +53,7 @@ function ResponsiveDrawer(props) {
             </Button>
           </Typography>
         </Box>
-        :  
+        :      
            <Typography variant="h6" noWrap component="div">
             <Button>
             <Link to="/appointment">Appointment</Link>
