@@ -10,11 +10,13 @@ import UseAuth from '../../../Context/Context/UseAuth';
 
 const Appointments = ({date}) => {
   
-    const { user } = UseAuth();
+    const { user, token } = UseAuth();
     const [appointments, setAppointments] = useState([])
     useEffect(() => {
         const url = `http://localhost:5000/appointments?email=${user.email}&date=${date}`;
-        fetch(url)
+        fetch(url, {headers:{
+          authorization: `Bearer ${token}`
+        }})
         .then(res => res.json())
         .then(data => setAppointments(data))
 

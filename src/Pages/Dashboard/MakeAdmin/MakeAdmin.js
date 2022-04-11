@@ -14,7 +14,7 @@ const MakeAdmin = () => {
       fetch(url, { 
         method: "PUT",
       headers:  {
-        'authorization': `Basic ${token}`,
+        'authorization': `Bearer ${token}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify(user),

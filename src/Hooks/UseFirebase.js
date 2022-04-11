@@ -88,7 +88,7 @@ const UseFirebase = () => {
   }, []);
 
   useEffect(() => {
-    const url = `http://localhost:5000/user?email=${user.email}`
+    const url = `http://localhost:5000/user?email=${user.email}`;
     fetch(url)
     .then((res) =>res.json())
     .then(date => setAdmin(date))  
