@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import { Button, TextField } from '@mui/material';
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import React, { useState } from 'react';
 import UseAuth from '../../../Context/Context/UseAuth';
 
 
@@ -21,7 +21,7 @@ const style = {
 
 
 const BookingModal = ({ openModal, handleCloseModal, booking, date, setBookingSuccess }) => {
-  const { name, time, space } = booking;
+  const { name, time } = booking;
   const {user} = UseAuth();
   const initialBookingInfo = {name:user.displayName, phone:"", email:user.email}
   const [bookingInfo, setBookingInfo] = useState(initialBookingInfo);
@@ -39,7 +39,7 @@ const BookingModal = ({ openModal, handleCloseModal, booking, date, setBookingSu
       serviceName: name,
       date: date.toLocaleDateString(),
     };
-    fetch('http://localhost:5000/appointment', {
+    fetch('https://fierce-dusk-81451.herokuapp.com/appointment', {
       method: 'POST',
       headers:  {
         'content-type': 'application/json'

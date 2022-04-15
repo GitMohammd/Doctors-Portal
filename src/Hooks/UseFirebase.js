@@ -1,20 +1,13 @@
-import initializeFirebase from "../Pages/Login/Firebase/Firebase.init";
 import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  createUserWithEmailAndPassword,
-  updateProfile,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
+    createUserWithEmailAndPassword, getAuth, getIdToken, GoogleAuthProvider, onAuthStateChanged,
+    signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import initializeFirebase from "../Pages/Login/Firebase/Firebase.init";
 
 initializeFirebase();
 
-const auth = getAuth();
-const googleProvider = new GoogleAuthProvider();
+
 
 const UseFirebase = () => {
   const [user, setUser] = useState({});
@@ -22,6 +15,10 @@ const UseFirebase = () => {
   const [token, setToken] = useState('')
   const [authError, setAuthError] = useState("");
   const [admin, setAdmin] = useState(false);
+
+
+  const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
 
   const registerUser = (email, password, name, navigate) => {
     setLoading(true);
@@ -43,9 +40,25 @@ const UseFirebase = () => {
         navigate("/", { replace: true });
       })
       .catch((error) => {
-        const errorCode = error.code;
+        
         setAuthError(error.message);
         // ..
+      })
+      .finally(() => setLoading(false));
+  };
+
+
+  const loginUser = (email, password, navigate, location) => {
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const from = location.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
+        setAuthError("");
+      })
+      .catch((error) => {
+        
+        setAuthError(error.message);
       })
       .finally(() => setLoading(false));
   };
@@ -60,7 +73,6 @@ const UseFirebase = () => {
         saveUser(user.email, user.displayName, 'PUT');
         const from = location.state?.from?.pathname || "/";
         navigate(from, { replace: true });
-        console.log(user.email);
       })
       .catch((error) => {
         setAuthError(error.message);
@@ -70,44 +82,31 @@ const UseFirebase = () => {
 
   // observe user state
 
-  useEffect(() => {
-    const unSubscribed = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (user) {
-          user.getIdToken(true)
-          .then((idToken) => setToken(idToken))
-          .catch(err => setAuthError(err))
-          setUser(user);
-        }
-      } else {
-        setUser({});
-      }
-      setLoading(false);
-    });
-    return () => unSubscribed;
-  }, []);
 
-  useEffect(() => {
-    const url = `http://localhost:5000/user?email=${user.email}`;
-    fetch(url)
-    .then((res) =>res.json())
-    .then(date => setAdmin(date))  
+  
 
-  }, [user.email]);
-  const loginUser = (email, password, navigate, location) => {
-    setLoading(true);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const from = location.state?.from?.pathname || "/";
-        navigate(from, { replace: true });
-        setAuthError("");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        setAuthError(error.message);
-      })
-      .finally(() => setLoading(false));
-  };
+     useEffect(() => {
+        const unsubscribed = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+                getIdToken(user)
+                    .then(idToken => {
+                        setToken(idToken);
+                    })
+            } else {
+                setUser({})
+            }
+            setLoading(false);
+        });
+        return () => unsubscribed;
+    }, [auth])
+
+   useEffect(() => {
+        fetch(`https://fierce-dusk-81451.herokuapp.com/user/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data))
+            .catch(error => (console.log(error)));
+    }, [user.email])
 
   const logOutUser = (email, password) => {
     setLoading(true);
@@ -124,7 +123,7 @@ const UseFirebase = () => {
 
   const saveUser = (email, displayName, method) => {
       const user = {email, displayName};
-      const url = 'http://localhost:5000/user';
+      const url = 'https://fierce-dusk-81451.herokuapp.com/user';
       fetch(url, { 
         method: method,
       headers:  {
